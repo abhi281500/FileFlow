@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 5000;
 
 
 app.use(cors({
-  origin: "*",// frontend ka URL
+  origin: "https://file-flow-wine.vercel.app",
   credentials: true
 }));
 
