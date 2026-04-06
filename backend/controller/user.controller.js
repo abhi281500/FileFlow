@@ -48,50 +48,49 @@ export const registerUser = async (req, res) => {
 
 export const loginUser = async (req, res) => {
     try {
-        const { username, password } = req.body
-        if (!username)
-            return res
-                .status(400)
-                .json({ message: "username is req" })
+        const { identifier, password } = req.body;
 
-
+        if (!identifier)
+            return res.status(400).json({ message: "Email or Username is required" });
 
         if (!password)
-            return res
-                .status(400)
-                .json({ message: "password is req" })
+            return res.status(400).json({ message: "Password is required" });
 
-
-        const existUser =await User.findOne({ username })
+        const existUser = await User.findOne({
+            $or: [
+                { email: identifier },
+                { username: identifier }
+            ]
+        });
 
         if (!existUser)
-            return res.status(400).json({ message: " Don't have an account from username ? " })
+            return res.status(400).json({ message: "User not found" });
 
-        const isMatch = await bcrypt.compare(password, existUser.password)
+        const isMatch = await bcrypt.compare(password, existUser.password);
 
         if (!isMatch)
-            return res.status(400).json({ message: "Incorrect Password" })
+            return res.status(400).json({ message: "Incorrect Password" });
 
-      const token=  jwt.sign(
-       { id: existUser._id,
-         username: existUser.username }, // Payload
-            process.env.JWT_SECRET || 'secret_key', // Secret
-            { expiresIn: '1h' }
-    );
-
-        res.status(200).json({ message: "Login successful",
-            token,
-             user: {
+        const token = jwt.sign(
+            {
                 id: existUser._id,
-                username: existUser.username,
-                
-            } 
-            });
+                username: existUser.username
+            },
+            process.env.JWT_SECRET || 'secret_key',
+            { expiresIn: '1h' }
+        );
 
+        res.status(200).json({
+            message: "Login successful",
+            token,
+            user: {
+                id: existUser._id,
+                username: existUser.username
+            }
+        });
 
     } catch (error) {
         console.error("Login Error:", error);
-        return res.status(500).json({ message: "Error Logging " });
+        return res.status(500).json({ message: "Error Logging" });
     }
-
 }
