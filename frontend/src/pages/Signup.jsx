@@ -15,7 +15,7 @@ function Signup() {
 
   return (
     <div>
-        <h2>Signup</h2>
+       <h2>Create Account</h2>
         <SignupForm onsignup ={handlesignup}/>
         </div>
   )

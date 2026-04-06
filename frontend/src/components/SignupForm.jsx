@@ -1,16 +1,20 @@
 import React, { useState } from 'react'
-
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function SignupForm({onsignup}) {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     
 
     const handlesubmit = async (e) => {
         e.preventDefault(); 
         onsignup({username, email, password})
+
+      navigate('/login')
        
 
         
@@ -44,6 +48,11 @@ function SignupForm({onsignup}) {
        />
 
          <button type="submit">Signup</button>
+
+         <p className="form-footer">
+          Already have an account? 
+          <Link to="/login" className="login-link"> Login</Link>
+        </p>
 
          </form>
         
