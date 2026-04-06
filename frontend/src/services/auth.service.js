@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export  const api = axios.create({
-    baseURL: 'http://localhost:5000',
+    baseURL: 'https://fileflow-5ed5.onrender.com/',
      withCredentials: true
 });
 // Aisa kuch hona chahiye aapke axios setup mein
