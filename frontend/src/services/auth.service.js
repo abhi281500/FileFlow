@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export  const api = axios.create({
     baseURL: 'https://fileflow-5ed5.onrender.com/',
-     withCredentials: true
+     withCredentials: false
 });
 // Aisa kuch hona chahiye aapke axios setup mein
 api.interceptors.request.use((config) => {
