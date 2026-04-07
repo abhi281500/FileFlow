@@ -10,7 +10,7 @@ function Login() {
   const handleLoginSubmit = async ({identifier, password}) => {
     try {
 
-      const response = await userlogin(identifier, password);
+      const response = await userlogin({identifier, password});
       localStorage.setItem('token', response.data.token);
 
       alert("Login Success!");
