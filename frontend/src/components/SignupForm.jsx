@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+
 import { Link } from 'react-router-dom';
 
 function SignupForm({onsignup}) {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const navigate = useNavigate();
+    
 
     
 
@@ -14,7 +14,7 @@ function SignupForm({onsignup}) {
         e.preventDefault(); 
         onsignup({username, email, password})
 
-      navigate('/login')
+      
        
 
         

@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 function Signup() {
   const navigate = useNavigate()
     const handlesignup = async ({username, email, password}) => {
-        await registerUser(username, email, password)
+        await registerUser({username, email, password})
         navigate('/login')
       
     }   
